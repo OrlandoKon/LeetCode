@@ -27,8 +27,8 @@ def save_json(path: Path, data):
 
 def toggle_language(path: Path):
     data = load_json(path)
-    current = data.get(KEY, "python")
-    new = "java" if current == "python" else "python"
+    current = data.get(KEY, "python3")
+    new = "java" if current == "python3" else "python3"
     backup(path)
     data[KEY] = new
     save_json(path, data)
