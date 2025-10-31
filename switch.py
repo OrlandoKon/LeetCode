@@ -2,9 +2,18 @@ import json
 import shutil
 from pathlib import Path
 from datetime import datetime
+import os
+import sys
 
 # 默认 settings.json 路径（Windows）
-SETTINGS_PATH = Path(r"C:\Users\Orlando\AppData\Roaming\Code\User\settings.json")
+if sys.platform == "darwin":
+    base = Path.home() / "Library" / "Application Support"
+elif sys.platform.startswith("win"):
+    base = Path(os.environ.get("APPDATA", Path.home() / "AppData" / "Roaming"))
+else:
+    base = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
+
+SETTINGS_PATH = base / "Code" / "User" / "settings.json"
 KEY = "leetcode.defaultLanguage"
 
 def backup(path: Path):
