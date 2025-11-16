@@ -7,17 +7,18 @@ from typing import List
 # @lc code=start
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        length = len(nums)
-        map = {}
+        candidate = -1
+        count = 0
 
         for num in nums:
-            if num in map.keys():
-                map[num] += 1
-            else:
-                map[num] = 1
+            if count == 0:
+                candidate = num
 
-        for key, value in map.items():
-            if value > length / 2:
-                return key
+            if candidate == num:
+                count += 1
+            else:
+                count -= 1
+
+        return candidate
 # @lc code=end
 
